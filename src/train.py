@@ -13,13 +13,17 @@ EPOCHS = 10
 
 # 2. Data Preprocessing (Augmentation & Normalization)
 data_transforms = {
-    'train_red': transforms.Compose([  
+    'train_red': transforms.Compose([
+        
+        # 1. Force Grayscale (So the model learns "Bright on Dark", not "White on Red")
+        transforms.Grayscale(num_output_channels=3),
+        
         transforms.Resize((224, 224)),
-        transforms.ColorJitter(brightness=0.2), # Helpful for lighting changes
         transforms.RandomRotation(20),
         transforms.ToTensor(),
     ]),
     'val_red': transforms.Compose([
+        transforms.Grayscale(num_output_channels=3), # Must match train!
         transforms.Resize((224, 224)),
         transforms.ToTensor(),
     ]),

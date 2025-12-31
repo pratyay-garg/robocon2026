@@ -23,13 +23,27 @@ LOWER_RED2 = np.array([170, 120, 70])
 UPPER_RED2 = np.array([180, 255, 255])
 
 def preprocess_for_model(img_roi):
+    # 1. Convert to Grayscale
     
-    img = cv2.cvtColor(img_roi, cv2.COLOR_BGR2RGB) 
+    gray = cv2.cvtColor(img_roi, cv2.COLOR_BGR2GRAY)
     
+    # 2. Apply Thresholding (Standard, NO Inversion)
+    # This turns the Dark Gray background to BLACK (0).
+    # This turns the White Symbol to WHITE (255).
+    # Result: White Symbol on Black Background.
+    _, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    
+   
+
+    # 3. Convert back to 3 channels (RGB) for the model
+    img = cv2.cvtColor(binary, cv2.COLOR_GRAY2RGB)
+    
+    # 4. Normalize & Reshape
     img = cv2.resize(img, (224, 224))
     img = img.transpose(2, 0, 1)
     img = np.expand_dims(img, axis=0)
     img = img.astype(np.float32) / 255.0
+    
     return img
 
 def main():
