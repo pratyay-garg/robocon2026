@@ -7,7 +7,7 @@ MODEL_PATH = "robocon_model.onnx"
 CONFIDENCE_THRESHOLD = 0.75  # Model must be 75% sure of the symbol
 MIN_BOX_AREA = 5000         # Ignore tiny red specks (noise)
 
-# Class Names (Must match your training folder order!)
+# Class Names
 CLASS_NAMES = ['Logo', 'Oracle', 'Random'] 
 
 # --- LOAD MODEL ---
@@ -23,9 +23,7 @@ LOWER_RED2 = np.array([170, 120, 70])
 UPPER_RED2 = np.array([180, 255, 255])
 
 def preprocess_for_model(img_roi):
-    # REMOVED: gray = cv2.cvtColor(img_roi, cv2.COLOR_BGR2GRAY)
-    # REMOVED: img = cv2.cvtColor(gray, cv2.COLOR_GRAY2RGB)
-    # KEEP: Convert BGR (OpenCV) to RGB (PyTorch Standard)
+    
     img = cv2.cvtColor(img_roi, cv2.COLOR_BGR2RGB) 
     
     img = cv2.resize(img, (224, 224))
@@ -35,6 +33,7 @@ def preprocess_for_model(img_roi):
     return img
 
 def main():
+
     # Use 0 for default laptop cam, 1 for external
     cap = cv2.VideoCapture(0) 
 
@@ -82,7 +81,7 @@ def main():
                 density = red_pixel_count / total_area
                 
                 # Only proceed if the box is sufficiently "Red" (>50% filled)
-                # Note: >95% is risky because the White Symbol inside reduces the red count!
+                
                 if density > 0.5: 
                     found_valid_box = True
                     largest_box = (x, y, w, h)
@@ -102,6 +101,7 @@ def main():
                 
                 # 4. Interpret Result
                 probs = outputs[0][0] # Softmax probabilities if added, or raw logits
+
                 # Using simple argmax on logits works fine for classification
                 prediction_idx = np.argmax(probs)
                 
@@ -127,7 +127,7 @@ def main():
 
         else:
             # --- NO RED BOX FOUND ---
-            # Default to "Random" or "Searching"
+            # Default to "Random"
             cv2.putText(frame, "Status: No Red Box (Random)", (10, 40), 
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 2)
 

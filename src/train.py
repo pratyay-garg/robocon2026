@@ -13,10 +13,7 @@ EPOCHS = 10
 
 # 2. Data Preprocessing (Augmentation & Normalization)
 data_transforms = {
-    'train_red': transforms.Compose([
-        # REMOVED: transforms.RandomInvert(p=1.0), 
-        # REMOVED: transforms.Grayscale(num_output_channels=3),
-        
+    'train_red': transforms.Compose([  
         transforms.Resize((224, 224)),
         transforms.ColorJitter(brightness=0.2), # Helpful for lighting changes
         transforms.RandomRotation(20),

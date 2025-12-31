@@ -3,7 +3,7 @@ import torch.nn as nn
 from torchvision import models
 
 # 1. Load the Model Structure
-model = models.mobilenet_v2(weights=None) # No need for weights here, we load ours
+model = models.mobilenet_v2(weights=None) 
 model.classifier[1] = nn.Linear(model.last_channel, 3) # 3 Classes
 
 # 2. Load Trained Weights
@@ -26,4 +26,3 @@ torch.onnx.export(
 )
 
 print(f"Model exported to {onnx_path}")
-print("Check file size to ensure it is <= 10MB.")
