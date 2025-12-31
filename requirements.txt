@@ -1,0 +1,15 @@
+# Core Deep Learning Framework
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Computer Vision & Image Processing
+opencv-python>=4.7.0
+numpy>=1.21.0
+Pillow>=9.0.0
+
+# ONNX Export & Runtime (Crucial for Robocon Deployment)
+onnx>=1.13.0
+onnxruntime>=1.14.0
+
+# Visualization (Optional but helpful for checking training curves)
+matplotlib>=3.5.0
