@@ -4,7 +4,7 @@ import onnxruntime as ort
 
 # --- CONFIGURATION ---
 MODEL_PATH = "robocon_model.onnx"
-CONFIDENCE_THRESHOLD = 0.75  # Model must be 75% sure of the symbol
+CONFIDENCE_THRESHOLD = 0.8  # Model must be 80% sure of the symbol
 MIN_BOX_AREA = 5000         # Ignore tiny red specks (noise)
 
 # Class Names
@@ -17,9 +17,9 @@ input_name = session.get_inputs()[0].name
 
 # --- COLOR RANGES (HSV) ---
 # Red wraps around the color wheel (0-10 and 170-180)
-LOWER_RED1 = np.array([0, 120, 70])
+LOWER_RED1 = np.array([0, 160, 70])
 UPPER_RED1 = np.array([10, 255, 255])
-LOWER_RED2 = np.array([170, 120, 70])
+LOWER_RED2 = np.array([170, 160, 70])
 UPPER_RED2 = np.array([180, 255, 255])
 
 def preprocess_for_model(img_roi):

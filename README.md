@@ -16,3 +16,18 @@ To quit the inference press 'q' on the keyboard
 ---
 
  ### [Video Link - Google Drive](https://drive.google.com/drive/folders/1_IgoCrpiKWVnXukhA990dNM6ZeMFb9TI?usp=sharing)
+
+
+
+--- 
+## Updates
+
+This commit fixes the problem. 
+1. Picking human face as oracle or random (red box)
+2. Not able to identify logo and oracle different.
+
+
+
+
+
+
