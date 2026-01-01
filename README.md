@@ -11,6 +11,7 @@ to train the model (for blue team, edit train_red and val_red to train_blue and 
 export_onnx.py file converts it into onnx format.
 
 inference.py will run the model.
+To quit the inference press 'q' on the keyboard
 
 ---
 
